@@ -1,19 +1,19 @@
 // import React, { useEffect, useState } from 'react';
-// import Kalend, { CalendarEvent, CalendarView, OnEventDragFinish } from 'calend';
-// import 'calend/dist/styles/index.css';
+// import Kalend, { CalendarEvent, CalendarView, OnEventDragFinish } from 'kalend';
+// import 'kalend/dist/styles/index.css';
+// import { OnEventClickData } from 'kalend';
 // import toast, { Toaster } from 'react-hot-toast';
-// import { OnEventClickData } from 'calend';
 
+// const onNewEventClick = (data) => {
+//   console.log(data)
+// };
 
+// const onShowMoreMonthClick = (data) => {
+//   console.log(data)
+// };
 
-// const CalendComponent = () => {
-
-  // useEffect(() => {
-  //   notify();
-  // }, []);
-
-//   const events = {
-//     '01-11-2021': [
+// const events = [
+//     {'01-11-2021' : 
 //         {
 //         id: 1,
 //         startAt: '2021-11-21T18:00:00.000Z',
@@ -21,8 +21,8 @@
 //         summary: 'test',
 //         color: 'blue',
 //         }
-//     ],
-//     '21-11-2021': [
+//       },
+//     {'21-11-2021': 
 //         {
 //         id: 2,
 //         startAt: '2021-11-21T18:00:00.000Z',
@@ -30,55 +30,43 @@
 //         summary: 'test',
 //         color: 'blue',
 //         }
-//     ]
-// }
+//       }
+//   ]
 
-// const notify = () => toast("Don't you worry, don't you worry, child \n See heaven's got a plan for you", {
-//   icon: '🛩️',
-// });
-
+// const CalendarComponent = () => {
+//   const notify = (podatak) => toast(podatak, {
+//     icon: '✈️',
+//   });
 //   const [demoEvents, setDemoEvents] = useState(events);
 
-//   const onNewEventClick = (demoEvents) => {
-//     console.log(demoEvents);
+
+//   const onEventClick = (OnEventClickData) => {
+//     notify(OnEventClickData)
 //   };
 
-//   const onShowMoreMonthClick = (demoEvents) => {
-//     console.log(demoEvents);
-//   };
-
-
-//   const onEventClick = (demoEvents) => {
-//     console.log(demoEvents);
-//     //modal for this
-//   };
-
+//   // const onEventDragFinish = (
+//   //   CalendarEvent,
+//   //   events
+//   // ) => {
+//   // };
 
 //   return (
-// //     <>
-//       <Toaster
-//         position="top-center"
-//         reverseOrder={false}
-//       />
 //       <Kalend
-//         onNewEventClick={onNewEventClick}
+//         // onNewEventClick={onNewEventClick}
 //         initialView={CalendarView.WEEK}
-//         disabledViews={[]}
-//         onEventClick={onEventClick}
+//         // disabledViews={[]}
+//         // onEventClick={onEventClick}
 //         events={demoEvents}
 //         initialDate={new Date().toISOString()}
 //         hourHeight={60}
-//         showMoreMonth={onShowMoreMonthClick}
+//         // showMoreMonth={onShowMoreMonthClick}
 //         timezone={'Europe/Berlin'}
-//         onEventDragFinish={OnEventDragFinish}
+//         // onEventDragFinish={onEventDragFinish}
 //       />
-//     </>
 //   );
 // };
 
-
-// export default CalendComponent;
-
+// export default CalendarComponent;
 
 
 import React, { useEffect, useState } from 'react';
@@ -162,3 +150,184 @@ export default function CalendarComponent({currentUser}) {
     </>
   );
 }
+
+// import React from 'react';
+// import '@mobiscroll/react/dist/css/mobiscroll.min.css';
+// import { Eventcalendar, getJson, toast } from '@mobiscroll/react';
+
+// function CalendarComponent() {
+
+//     const [myEvents, setEvents] = React.useState([]);
+
+//     React.useEffect(() => {
+//         getJson('https://trial.mobiscroll.com/events/?vers=5', (events) => {
+//             setEvents(events);
+//         }, 'jsonp');
+//     }, []);
+    
+//     const onEventClick = React.useCallback((event) => {
+//         toast({
+//             message: event.event.title
+//         });
+//     }, []);
+    
+//     const view = React.useMemo(() => {
+//         return {
+//             schedule: { type: 'week' }
+//         };
+//     }, []);
+
+//     return (
+//         <Eventcalendar
+//             theme="ios" 
+//             themeVariant="light"
+//             clickToCreate={true}
+//             dragToCreate={true}
+//             dragToMove={true}
+//             dragToResize={true}
+//             data={myEvents}
+//             view={view}
+//             onEventClick={onEventClick}
+//        />
+//     ); 
+// }
+
+// export default CalendarComponent;
+
+// import React, { useEffect, useState } from 'react';
+// import { DateTime } from 'luxon';
+// import Kalend, { CalendarView, OnEventDragFinish } from 'kalend';
+// import 'kalend/dist/styles/index.css';
+// // import faker from 'faker';
+// import { v4 } from 'uuid';
+
+// const colors = [
+//   'indigo',
+//   'blue',
+//   'orange',
+//   'red',
+//   'pink',
+//   'crimson',
+//   'dodgerblue',
+//   'brown',
+//   'purple',
+//   'tomato',
+//   'MediumPurple',
+//   'salmon',
+// ];
+
+// const generateDemoEvents = (
+//   date= DateTime.now(),
+//   count = 190
+// ) => {
+//   const events = [];
+
+//   const monthStart = date
+//     .set({ day: 1 })
+//     .minus({ days: 14 })
+//     .toFormat('yyyy-MM-dd');
+//   const monthEnd = date
+//     .set({ day: 28 })
+//     .plus({ days: 14 })
+//     .toFormat('yyyy-MM-dd');
+
+//   for (let i = 1; i < count; i += 1) {
+//     const dateStart = faker.date.between(monthStart, monthEnd);
+
+//     const hour = Math.floor(Math.random() * 23) + 1;
+//     const minute = Math.floor(Math.random() * 40) + 1;
+//     const minuteDuration = Math.floor(Math.random() * 120) + 30;
+
+//     const startDate = DateTime.fromJSDate(dateStart).set({
+//       hour: hour,
+//       minute: minute,
+//     });
+//     const endDate = startDate.plus({ minute: minuteDuration });
+
+//     const event = {
+//       id: v4(),
+//       startAt: startDate.toUTC().toString(),
+//       endAt: endDate.toUTC().toString(),
+//       summary: faker.commerce.department(),
+//       color: colors[Math.floor(Math.random() * colors.length - 1) + 1],
+//       allDay: endDate.day !== startDate.day,
+//     };
+
+//     events.push(event);
+//   }
+
+//   return events;
+// };
+
+// const CalendarComponent = () => {
+//   const [demoEvents, setDemoEvents] = useState([
+//     {'01-11-2021' : 
+//         {
+//         id: 1,
+//         startAt: '2021-11-21T18:00:00.000Z',
+//         endAt: '2021-11-21T19:00:00.000Z',
+//         summary: 'test',
+//         color: 'blue',
+//         }
+//       },
+//     {'21-11-2021': 
+//         {
+//         id: 2,
+//         startAt: '2021-11-21T18:00:00.000Z',
+//         endAt: '2021-11-21T19:00:00.000Z',
+//         summary: 'test',
+//         color: 'blue',
+//         }
+//       }
+//   ]
+// );
+
+//   // Create and load demo events
+//   useEffect(() => {
+//     // setDemoEvents(generateDemoEvents(DateTime.now(), 80));
+//     console.log('nesto');
+//   }, []);
+
+//   const onNewEventClick = (data) => {
+//     const msg = `New event click action\n\n Callback data:\n\n${JSON.stringify({
+//       hour: data.hour,
+//       day: data.day,
+//       event: 'click event ',
+//     })}`;
+//     console.log(msg);
+//   };
+
+//   // Callback for event click
+//   const onEventClick = (data) => {
+//     const msg = `Click on event action\n\n Callback data:\n\n${JSON.stringify(
+//       data
+//     )}`;
+//     console.log(msg);
+//   };
+
+//   // Callback after dragging is finished
+//   const onEventDragFinish = (
+//     prev,
+//     current,
+//     data
+//   ) => {
+//     setDemoEvents(data);
+//   };
+
+//   return (
+//     <Kalend
+//       onNewEventClick={onNewEventClick}
+//       initialView={CalendarView.MONTH}
+//       disabledViews={[]}
+//       onEventClick={onEventClick}
+//       events={demoEvents}
+//       initialDate={new Date().toISOString()}
+//       hourHeight={60}
+//       timezone={'Europe/Berlin'}
+//       onEventDragFinish={onEventDragFinish}
+//       disableMobileDropdown={true}
+//     />
+//   );
+// };
+
+// export default CalendarComponent;

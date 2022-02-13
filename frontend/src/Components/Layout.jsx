@@ -89,11 +89,6 @@ export default function Layout({ children, currentUser}) {
         icon: <NewspaperIcon color="secondary" />,
         path:'/news'
       },
-      // {
-      //   text: 'Recipes',
-      //   icon: <CelebrationIcon color="secondary" />,
-      //   path:'/recipes'
-      // },
       {
         text: 'Game',
         icon: <TravelExploreIcon color="secondary" />,

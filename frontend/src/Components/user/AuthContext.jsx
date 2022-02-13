@@ -21,6 +21,7 @@ export const AuthContextProvider = ({children}) => {
             netlifyIdentity.close()
             console.log('login event')
             console.log(user);
+            window.location.reload();
         })
 
         netlifyIdentity.on('logout', (user) => {
@@ -28,6 +29,7 @@ export const AuthContextProvider = ({children}) => {
             netlifyIdentity.close();
             console.log('logout event');
             console.log(user);
+            window.location.reload();
         })
                 //init netlify identity connection
                 netlifyIdentity.init()
