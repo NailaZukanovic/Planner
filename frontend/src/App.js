@@ -24,7 +24,8 @@ import WeatherApp from './Components/weather/WeatherApp';
 import AuthContext, { AuthContextProvider } from './Components/user/AuthContext';
 import PageNotFound from './Components/PageNotFound';
 import { useContext } from 'react';
-
+import SearchWeather from './Components/weather/SearchWeather';
+import netlifyIdentity from 'netlify-identity-widget';
 
 const theme = createTheme({
   palette: {
@@ -67,15 +68,24 @@ const useStyles = makeStyles({
 
 const App = () => {
   const classes = useStyles();
-  return (
+
+  
+  const currentUser = netlifyIdentity.currentUser();
+
+  netlifyIdentity.init();
+
+
+  console.log(currentUser, 'current User');
+
+    return (
     <AuthContextProvider>
      <ThemeProvider theme={theme} >
         <BrowserRouter>
-        <Layout>
+        <Layout currentUser={currentUser}>
           <Routes>
-                    <Route path="/Create" element={<Create/>}/>
-                    <Route path="/Notes" element={<Notes/>}/>
-                    <Route path="/Calendar" element={<Calendar/>}/>
+                    <Route path="/Create" element={currentUser ? <Create currentUser={currentUser}/> :  <Navigate to='/' /> }/>
+                    <Route path="/Notes" element={currentUser ? <Notes currentUser={currentUser}/> : <Navigate to="/" /> }/>
+                    <Route path="/Calendar" element={currentUser ? <Calendar currentUser={currentUser}/> : <Navigate to="/" />}/>
                     <Route path="/news" element={<NewsContainer />}/>
                     <Route path="/" exact element={<Game/>}/>
                     <Route path="/Weather" element={<WeatherApp />} />

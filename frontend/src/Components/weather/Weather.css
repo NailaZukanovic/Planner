@@ -10,6 +10,10 @@
   }
 .container {
     height: 90vh;
+    background-image: url("https://source.unsplash.com/600x900/?nature,water"); 
+    background-repeat: no-repeat;
+    background-size:cover;
+    opacity: 0.8;
 }
 
 .row {
@@ -18,7 +22,8 @@
 
   .main {
     height: 90vh;
-    background: #fff;
+    /* background: #fff;*/
+    /* background-image: url("https://source.unsplash.com/600x900/?nature,water");  */
     box-shadow: 0px 13px 40px -13px hsla(0, 1%, 42%, 0.878);
     width: auto;
     max-width: 80%;
@@ -50,14 +55,14 @@
   }
   
   .form-container {
-    background-color: white;
+    /* background-color: white; */
     height: 100%;
     padding-top: 100px;
     padding-left: 50px;
   }
   
   .inputi {
-    background-color: white;
+    /* background-color: white; */
     border: 0;
     border-bottom: solid 1px hsl(303, 85%, 63%);
     width: 30%;
@@ -70,12 +75,16 @@
     font-size: 20px;
   }
   
+  .inputi:-internal-autofill-selected {
+    background-color: none;
+  }
+
   .inputi {
       outline: none;
   }
   
   .inputi:-webkit-autofill {
-      -webkit-box-shadow: 0 0 0 30px white inset;
+      /* -webkit-box-shadow: 0 0 0 30px white inset; */
       -webkit-text-fill-color: black !important;
   }
   
@@ -105,7 +114,7 @@
   }
   
   .weather__key {
-    color: hsl(303, 85%, 63%);;
+    color: white;
     border-bottom: solid 2px hsla(0, 1%, 42%, 0.878);
     padding: 20px 0 20px 0;
     font-weight: 400;
@@ -116,12 +125,12 @@
   }
   
   .weather__value {
-    color: black;
+    color: white;
     font-weight: 200;
   }
   
   .weather__error {
-    color: hsl(303, 85%, 63%);;
+    color: white;
     font-size: 20px;
     letter-spacing: 1px;
     font-weight: 200;

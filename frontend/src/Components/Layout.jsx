@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { makeStyles } from '@material-ui/core'
 import Drawer from '@material-ui/core/Drawer'
 import Typography from '@material-ui/core/Typography'
@@ -47,12 +47,26 @@ const useStyles = makeStyles((theme) => {
   }
 })
 
-export default function Layout({ children}) {
+export default function Layout({ children, currentUser}) {
   const {user, login, logout, token} = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const classes = useStyles();
+  const [identity, setIdentity] = useState(null);
 
+// useEffect(() => {
+// //   fetch('./netlify/functions/notes', {
+// //     headers: {
+// //         Authorization: 'Bearer' + user.token.access_token
+// //     }
+// // }).then(res => res.json())
+// .then(data =>{ setIdentity(data); console.log(data)});
+
+// console.log(identity);
+// console.log(token);
+// console.log(user);
+  
+// }, []);
 
   const menuItems = [
       { 
@@ -80,11 +94,11 @@ export default function Layout({ children}) {
       //   icon: <CelebrationIcon color="secondary" />,
       //   path:'/recipes'
       // },
-      // {
-      //   text: 'Game',
-      //   icon: <TravelExploreIcon color="secondary" />,
-      //   path:'/'
-      // },
+      {
+        text: 'Game',
+        icon: <TravelExploreIcon color="secondary" />,
+        path:'/'
+      },
       {
         text: 'Weather',
         icon: <NightsStayIcon color="secondary" />,
@@ -113,7 +127,7 @@ export default function Layout({ children}) {
         {/* links/list section */}
 
         <List className="okvir">
-          {user && menuItems.map((item) => (
+          {menuItems.map((item) => (
             <ListItem
               key={item.text} 
               button
@@ -125,16 +139,7 @@ export default function Layout({ children}) {
             </ListItem>
            
           ))}
-          <ListItem
-            key={'Game'} 
-            button
-            onClick={() => navigate('/')}
-            className={location.pathname == '/' ? classes.active : null}
-            >
-            <ListItemIcon><TravelExploreIcon color="secondary" /></ListItemIcon>
-            <ListItemText primary={'Game'} />
-          </ListItem>
-         { user ? <ListItem
+         { currentUser ? <ListItem
             key={'Logout'}
             button
             onClick={() => logout()}

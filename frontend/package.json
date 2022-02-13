@@ -54,6 +54,7 @@
     "react-loadingg": "^1.7.2",
     "react-login": "^0.1.0",
     "react-masonry-css": "^1.0.16",
+    "react-netlify-identity": "^0.2.5",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "react-scripts": "4.0.3",

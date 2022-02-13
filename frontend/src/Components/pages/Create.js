@@ -34,7 +34,7 @@ const useStyles = makeStyles({
 });
 
 
-export default function Create({theme}) {
+export default function Create({theme, currentUser}) {
   const classes = useStyles()
   const navigate = useNavigate()
   const [title, setTitle] = useState('')
@@ -55,10 +55,12 @@ export default function Create({theme}) {
     if (details === '') {
       setDetailsError(true)
     }
+
     if (title && details) {
       fetch('http://localhost:4000/notes', {
         method: 'POST',
-        headers: {"Content-type": "application/json"},
+        headers: {"Content-type": "application/json",
+        'Authorization': 'Bearer ' + currentUser.token.access_token},
         body: JSON.stringify({ title, details, category })
       }).then(() => navigate('/Notes'))
 

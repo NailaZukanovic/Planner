@@ -47,7 +47,7 @@ const useStyles = makeStyles({
   
 
 
-export default function Notes() {
+export default function Notes({currentUser}) {
 
 
     const classes = useStyles();
@@ -88,14 +88,19 @@ export default function Notes() {
     };
   
     useEffect(() => {
-      axios.get('http://localhost:4000/notes')
+      axios.get('http://localhost:4000/notes', {
+        headers: {
+            'Authorization': 'Bearer ' + currentUser.token.access_token
+        }
+    })
         // .then(res => res.json())
         .then(data => 
           { setNotes(prevNotes => {
             return [...prevNotes,...data.data.notes]
           });
               console.log(data); 
-            setLoading(false);
+
+              setLoading(false);
           }
         )
     }, [])
@@ -110,7 +115,10 @@ export default function Notes() {
       console.log(_id);
 
       await fetch('http://localhost:4000/notes/' + _id, {
-        method: 'DELETE'
+        method: 'DELETE',
+          headers: {
+              'Authorization': 'Bearer ' + currentUser.token.access_token
+          }
       }).then(res => console.log(res)).catch(err => console.log(err));
 
       console.log(notes);
@@ -175,7 +183,7 @@ export default function Notes() {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-              <Update id={idUpdate} handleClose={handleClose}/>
+              <Update id={idUpdate} handleClose={handleClose} currentUser={currentUser}/>
           </Modal>  
 
       </Container>

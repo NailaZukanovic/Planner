@@ -32,7 +32,7 @@ const useStyles = makeStyles({
 });
 
 
-export default function Update({id, handleClose}) {
+export default function Update({id, handleClose, currentUser}) {
   const classes = useStyles()
   const navigate = useNavigate()
   const [title, setTitle] = useState('')
@@ -53,7 +53,11 @@ export default function Update({id, handleClose}) {
       setDetailsError(true)
     }
     if (title && details) {
-      axios.patch(`http://localhost:4000/notes/${id}`, { title, details, category });
+      axios.patch(`http://localhost:4000/notes/${id}`, { title, details, category },  {
+        headers: {
+            'Authorization': 'Bearer ' + currentUser.token.access_token
+        }
+    });
       console.log(id);
       handleClose();
     } 
